@@ -1,25 +1,44 @@
 import cartesianGrid from './cartesianGrid.js'
+import createSVGElement from './createSVGElement.js'
 
-const clock = document.querySelector('.clock')
+const clock = document.querySelector(".clock")
+const clockFace = createSVGElement({
+    type: "circle",
+    attributes: {
+        r: 140,
+        fill: "#f00"
+    }
+})
 
-const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect")
-rect.setAttributeNS(null, "width", 50)
-rect.setAttributeNS(null, "height", 50)
-rect.setAttributeNS(null, "x", 0)
-rect.setAttributeNS(null, "y", 0)
+function createMarkers() {
+    const markers = createSVGElement({type: "svg", attributes: {
+        id: "markers"
+    }})
+    for(let i = 0; i < 60; i++){
+        const angle = i * 6
+        const isHourMarker = (i % 5 === 0)
+        console.log(isHourMarker);
+        const marker = createSVGElement({
+            type: "line",
+            attributes: {
+                id: "marker",
+                class: isHourMarker ? "hourMarker" : "minuteMarker",
+                x1: 0,
+                y1: -130,
+                x2: 0,
+                y2: -140,
+                stroke: "#000"
+            }
+        })
+        marker.setAttributeNS(null, "transform", `rotate(${angle})`);
+        markers.appendChild(marker)
+    }
+    return markers
+}
 
-rect.setAttributeNS(null, "fill", "#f00")
-
-const line = document.createElementNS("http://www.w3.org/2000/svg", "line")
-line.setAttributeNS(null, "x1", 0)
-line.setAttributeNS(null, "y1", 0)
-line.setAttributeNS(null, "x2", 100)
-line.setAttributeNS(null, "y2", 100)
-line.setAttributeNS(null, "stroke", "#000")
-
-clock.appendChild(rect) 
-// console.log(clock);
+const markers = createMarkers()
 
 
-
-clock.appendChild(cartesianGrid)
+clock.appendChild(clockFace)
+clock.appendChild(markers)
+// clock.appendChild(cartesianGrid)
