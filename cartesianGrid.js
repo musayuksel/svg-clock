@@ -12,7 +12,7 @@ function createSVGElement({type, attributes}) {
 export default (function() {
     const svgNameSpace = "http://www.w3.org/2000/svg"
     
-    const parentEl = createSVGElement({type: "g"})
+    const parentEl = createSVGElement({type: "svg", attributes: { overflow: "visible", opacity: 1 }})
     const gridSize = 1000
     const font = "sans-serif"
     const fontWeight = "bold"

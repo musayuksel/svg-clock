@@ -20,4 +20,6 @@ line.setAttributeNS(null, "stroke", "#000")
 clock.appendChild(rect) 
 // console.log(clock);
 
+
+
 clock.appendChild(cartesianGrid)
