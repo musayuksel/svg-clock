@@ -8,14 +8,9 @@
     border-radius: 50%;
 }
 
-#markers {
+#markers{
     overflow: visible;
 }
-
-.hourMarker {
-    stroke: #fff,
-}
-
-.minuteMarker {
-    stroke: #000,
+#minuteSVG {
+    overflow: visible;
 }
