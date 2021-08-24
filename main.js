@@ -16,13 +16,15 @@ const clockFace = createSVGElement({
 const markers = createMarkers()
 
 
-const minuteSVG = createSVGElement({type: "svg", attributes: {
-    id: "minuteSVG"
-}})
-setInterval(runMin,100);
+
+const handsSVG = drawHands();
+setInterval(runClock,100);
 let secDeg=0;
-function runMin(){
-    //create min and add appendChild to clock
+function drawHands(){
+    const handsSVG = createSVGElement({type: "svg", attributes: {
+        id: "handsSVG"
+    }})
+
     const sec =createSVGElement({
         type: "line",
         attributes: {
@@ -36,8 +38,7 @@ function runMin(){
         }
     })
     
-    secDeg = (secDeg+6);
-    sec.setAttributeNS(null, "transform", `rotate(${secDeg})`);
+   
 
 
     const min =createSVGElement({
@@ -52,7 +53,7 @@ function runMin(){
                     "stroke-width":"3"
                 }
             })
-    min.setAttributeNS(null, "transform", `rotate(${secDeg/60})`);
+  
 
     const hour =createSVGElement({
             type: "line",
@@ -66,14 +67,20 @@ function runMin(){
                     "stroke-width":"3"
                 }
             })
-    hour.setAttributeNS(null, "transform", `rotate(${secDeg/3600})`);
- 
-    document.getElementById('minuteSVG').innerHTML=''//every sec delete before 
-    minuteSVG.appendChild(sec);
-    minuteSVG.appendChild(min);
-    minuteSVG.appendChild(hour);
+    
+    handsSVG.appendChild(sec);
+    handsSVG.appendChild(min);
+    handsSVG.appendChild(hour);
+    return handsSVG;
 }
 
+function runClock(){
+     secDeg = (secDeg+6);
+    const sec = document.getElementById('sec');
+    sec.setAttributeNS(null, "transform", `rotate(${secDeg+=6})`);
+    min.setAttributeNS(null, "transform", `rotate(${secDeg/60})`);
+    hour.setAttributeNS(null, "transform", `rotate(${secDeg/3600})`);
+}
 
 
 
@@ -83,5 +90,5 @@ function runMin(){
 
 clock.appendChild(clockFace)
 clock.appendChild(markers)
-clock.appendChild(minuteSVG)
+clock.appendChild(handsSVG)
 // clock.appendChild(cartesianGrid)
