@@ -4,11 +4,11 @@ import createMarkers from './clockFace.js'//lines for mins and hours
 
 const clock = document.querySelector(".clock")
 const clockFace = createSVGElement({
-    type: "circle",
     attributes: {
         r: 140,
         fill: "#f00"
-    }
+    },
+    type: "circle"
 })
 
 
@@ -18,7 +18,10 @@ const markers = createMarkers()
 
 
 const handsSVG = drawHands();
-setInterval(runClock,100);
+// setInterval(runClock,1000);
+requestAnimationFrame(runClock);
+
+
 let secDeg=0;
 function drawHands(){
     const handsSVG = createSVGElement({type: "svg", attributes: {
@@ -73,13 +76,23 @@ function drawHands(){
     handsSVG.appendChild(hour);
     return handsSVG;
 }
-
 function runClock(){
-     secDeg = (secDeg+6);
+    const date = new Date();
+    const hourdeg = date.getHours()*30
+    const minutes = date.getMinutes()*6
+    const second = date.getSeconds()*6;
+
+    
+    
+    secDeg = (secDeg+6);
     const sec = document.getElementById('sec');
-    sec.setAttributeNS(null, "transform", `rotate(${secDeg+=6})`);
-    min.setAttributeNS(null, "transform", `rotate(${secDeg/60})`);
-    hour.setAttributeNS(null, "transform", `rotate(${secDeg/3600})`);
+    const min = document.getElementById('min');
+    const hours = document.getElementById('hour');
+ 
+    sec.setAttributeNS(null, "transform", `rotate(${second})`);
+    min.setAttributeNS(null, "transform", `rotate(${minutes})`);
+    hours.setAttributeNS(null, "transform", `rotate(${hourdeg})`);
+    requestAnimationFrame(runClock)
 }
 
 
@@ -91,4 +104,5 @@ function runClock(){
 clock.appendChild(clockFace)
 clock.appendChild(markers)
 clock.appendChild(handsSVG)
-// clock.appendChild(cartesianGrid)
+clock.appendChild(cartesianGrid)
+runClock();

@@ -10,7 +10,7 @@ export default function createMarkers() {
       const marker = createSVGElement({
           type: "line",
           attributes: {
-              id: "marker",
+              class: "marker",
               x1: 0,
               y1: -130,
               x2: 0,
