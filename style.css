@@ -1,17 +1,16 @@
 .clock {
-    border: 1px solid black;
-    width: 300px;
-    height: 300px;
-    display: block;
-    margin: 100px auto;
-    overflow: visible;
-    border-radius: 50%;
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+  display: block;
+  margin: 100px auto;
+  overflow: visible;
+  border-radius: 50%;
 }
 
-#markers{
-    overflow: visible;
+#markers {
+  overflow: visible;
 }
 #handsSVG {
-    overflow: visible;
+  overflow: visible;
 }
-

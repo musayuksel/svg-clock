@@ -18,7 +18,6 @@ const markers = createMarkers()
 
 
 const handsSVG = drawHands();
-// setInterval(runClock,1000);
 requestAnimationFrame(runClock);
 
 
@@ -78,13 +77,13 @@ function drawHands(){
 }
 function runClock(){
     const date = new Date();
-    const hourdeg = date.getHours()*30
-    const minutes = date.getMinutes()*6
-    const second = date.getSeconds()*6;
 
-    
-    
-    secDeg = (secDeg+6);
+    const ms = (date.getMilliseconds());
+    const second = (date.getSeconds()*6+(ms*6/1000));
+    //between 2 seconds angle will change acording to ms
+    const minutes = date.getMinutes()*6 + (second/60)%6//for middle angle
+    const hourdeg = date.getHours()*30+(minutes/6)%30
+
     const sec = document.getElementById('sec');
     const min = document.getElementById('min');
     const hours = document.getElementById('hour');
@@ -104,5 +103,5 @@ function runClock(){
 clock.appendChild(clockFace)
 clock.appendChild(markers)
 clock.appendChild(handsSVG)
-clock.appendChild(cartesianGrid)
-runClock();
+// clock.appendChild(cartesianGrid)
+// runClock();
